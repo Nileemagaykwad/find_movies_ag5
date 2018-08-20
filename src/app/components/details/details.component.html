@@ -1,0 +1,38 @@
+<div *ngIf="movie">
+  <nav class="navbar navbar-light bg-light">
+  <span class="navbar-text">
+    <h3><b>{{movie.title}}</b></h3>
+  </span>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" routerLink="/">Home</button>
+
+  </nav>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-5">
+          <img src="http://image.tmdb.org/t/p/w500/{{movie.poster_path}}" alt="" class="thumbnail">
+        </div>
+        <div class="col-md-7">
+          <br>
+          <br>
+          <ul >
+            <li><b>Overview: </b><p>{{movie.overview}}</p></li>
+            <br>
+            <li><b>Generes: </b> <span *ngFor="let genre of movie.genres">{{genre.name}} </span></li>
+            <br>
+            <li><b>Release Date: </b> {{movie.release_date}} </li>
+          </ul>
+          <br>
+          <a *ngIf="movie.homepage" href="{{movie.homepage}}" target="_blank" class="btn btn-default">Visit Movie Website</a>
+        </div>
+
+
+
+
+
+
+      </div>
+
+    </div>
+  </div>
+</div>

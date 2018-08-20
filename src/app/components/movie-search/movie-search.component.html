@@ -1,0 +1,59 @@
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-text">
+    <h3><b>Search Movies</b></h3>
+  </span>
+  <form class="form-inline" (submit)="searchMovies()">
+    <input class="form-control mr-sm-2" [(ngModel)]="searchStr" name="searchStr"  type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+
+<!--Search Result Area-->
+<div *ngIf="searchRes" class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">Search Results</h4>
+  </div>
+  <div class="panel-body" *ngIf="this.searchRes.length == 0">
+    <div class="jumbotron jumbotron-fluid" style="background-color: white">
+      <div class="container">
+        <span style="color: gray">we can not find a movie with the name <b> {{searchStr}}</b>. Please try a different name. </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel-body">
+    <div class="row">
+      <div *ngFor="let movie of searchRes; let i=index" class="col-md-3">
+      <div class="card" style="width: 18rem;" *ngIf="i < 6">
+            <a routerLink="/movie/{{movie.id}}">
+              <img *ngIf="movie.poster_path" class="card-img-top zoom" src="http://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt=" ">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">{{ movie.title }}</h5>
+              <a href="#" class="btn btn-outline-success my-2 my-sm-0" routerLink="/movie/{{movie.id}}">View details</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="(!searchRes || this.searchRes.length == 0)" class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">Popular Movies</h4>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div *ngFor="let movie of popularList; let i=index" class="col-md-3">
+          <div class="card" style="width: 18rem;" *ngIf="i < 6">
+            <a routerLink="/movie/{{movie.id}}">
+              <img *ngIf="movie.poster_path" class="card-img-top zoom" src="http://image.tmdb.org/t/p/w500/{{ movie.poster_path }}" alt=" ">
+            </a>
+            <div class="card-body">
+            <h5 class="card-title">{{ movie.title }}</h5>
+            <a href="#" class="btn btn-outline-success my-2 my-sm-0" routerLink="/movie/{{movie.id}}">View details</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
